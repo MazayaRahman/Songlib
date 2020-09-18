@@ -24,7 +24,7 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ListView id="songListView" layoutX="-1.0" layoutY="50.0" prefHeight="270.0" prefWidth="302.0" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10" />
+            <ListView fx:id="songListView" AnchorPane.topAnchor = "10" AnchorPane.leftAnchor = "10" AnchorPane.rightAnchor = "10" AnchorPane.bottomAnchor = "10"/>
          </children></AnchorPane>
       <GridPane prefHeight="269.0" prefWidth="299.0" GridPane.columnIndex="1">
         <columnConstraints>

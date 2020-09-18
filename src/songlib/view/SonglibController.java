@@ -12,21 +12,23 @@ import songlib.app.Song;
 
 public class SonglibController {
 	
-	@FXML ListView<String> songListView;
+	@FXML ListView<Song> songListView;
 	@FXML Button addSongBtn;
 	@FXML Button editSongBtn;
 	@FXML Button deleteSongBtn;
 	@FXML TextArea songDetailView;
 	
-	private ObservableList<String> songList; 
+	private ObservableList<Song> songList; 
 	
 	public void init() {
 		// create an ObservableList
 		// from an ArrayList
 		
 		songList = FXCollections.observableArrayList(
-		"Apple", "Banana");
+		new Song("Dynamite", "BTS"),
+		new Song("Ice Cream", "BlackPink"));
 
+		//But this does not really set song name, artist name, it assigns object refs
 		songListView.setItems(songList);
 		
 		}
