@@ -20,7 +20,7 @@ public class Songlib extends Application{
 		
 		GridPane root = (GridPane)loader.load();
 		SonglibController listController = loader.getController();
-		listController.init();
+		listController.init(primaryStage);
 		
 		
 		Scene scene = new Scene(root);
