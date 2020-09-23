@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 import songlib.view.SonglibController;
 
 public class Songlib extends Application{
+	/**
+	 * Starting the Application
+	 * @param primaryStage
+	 */
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -22,17 +26,23 @@ public class Songlib extends Application{
 		SonglibController listController = loader.getController();
 		listController.init(primaryStage);
 		
-		
 		Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Song Library");
         primaryStage.setResizable(false);
+        
+        //when the stage is closed
+		primaryStage.setOnCloseRequest(event -> { 
+		listController.close(); });
+		 
         primaryStage.show();
 		
 	}
-	
+	/**
+	 * Launching the stage
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		launch(args);
 
 	}

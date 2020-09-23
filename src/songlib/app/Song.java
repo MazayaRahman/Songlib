@@ -19,9 +19,9 @@ public class Song implements Comparable<Song>{
 	
 	@Override
 	public int compareTo(Song song) {
-		if(this.songName.compareTo(song.songName) == 0) {
-			return this.artistName.compareTo(song.artistName);
+		if(this.songName.toLowerCase().compareTo(song.songName.toLowerCase()) == 0) {
+			return this.artistName.toLowerCase().compareTo(song.artistName.toLowerCase());
 		}
-	    return this.songName.compareTo(song.songName);
+	    return this.songName.toLowerCase().compareTo(song.songName.toLowerCase());
 	}
 }
