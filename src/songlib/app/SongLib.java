@@ -1,17 +1,19 @@
+/**
+ * @author Mazaya Rahman
+ * @author Disha Bailoor
+ *
+ */
+
 package songlib.app;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import songlib.view.SonglibController;
 
-public class Songlib extends Application{
+public class SongLib extends Application{
 	/**
 	 * Starting the Application
 	 * @param primaryStage

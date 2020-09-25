@@ -1,4 +1,11 @@
+/**
+ * @author Mazaya Rahman
+ * @author Disha Bailoor
+ *
+ */
+
 package songlib.app;
+
 
 public class Song implements Comparable<Song>{
 	

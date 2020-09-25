@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+  @author Mazaya Rahman
+  @author Disha Bailoor
+ -->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -24,7 +29,12 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ListView fx:id="songListView" prefHeight="296.0" prefWidth="290.0" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10" />
+            <ListView fx:id="songListView" layoutY="38.0" prefHeight="268.0" prefWidth="290.0" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="14.0" prefHeight="20.0" prefWidth="290.0" text="Song | Artist">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
       <GridPane prefHeight="327.0" prefWidth="299.0" GridPane.columnIndex="1">
         <columnConstraints>
@@ -48,7 +58,7 @@
             </Label>
            <TextField fx:id="artistNameText" prefColumnCount="10" GridPane.rowIndex="1">
             <GridPane.margin>
-       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0"/>
+       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0" />
     		</GridPane.margin>
    		   </TextField>
             <Label text="Artist" GridPane.halignment="CENTER" GridPane.rowIndex="1">
@@ -59,9 +69,9 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-           <TextField fx:id="albumNameText" prefColumnCount="10" GridPane.rowIndex="2" >
+           <TextField fx:id="albumNameText" prefColumnCount="10" GridPane.rowIndex="2">
             <GridPane.margin>
-       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0"/>
+       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0" />
     		</GridPane.margin>
    		   </TextField>
             <Label text="Album" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -74,7 +84,7 @@
             </Label>
             <TextField fx:id="yearText" prefColumnCount="10" GridPane.rowIndex="3">
              <GridPane.margin>
-       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0"/>
+       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0" />
     		</GridPane.margin>
    		   </TextField>
             <Label text="Year" GridPane.halignment="CENTER" GridPane.rowIndex="3">
@@ -87,15 +97,15 @@
             </Label>
             <TextField fx:id="songNameText" prefColumnCount="10" GridPane.rowIndex="0">
              <GridPane.margin>
-       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0"/>
+       			 <Insets bottom="0.0" left="0.0" right="0.0" top="20.0" />
     		</GridPane.margin>
    		   </TextField>
-            <Button fx:id="saveBtn" mnemonicParsing="false" text="Save" GridPane.rowIndex="4" onAction ="#saveSong">
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveSong" text="Save" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="75.0" top="30.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="4" onAction="#cancelSong">
+            <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelSong" text="Cancel" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="175.0" top="30.0" />
                </GridPane.margin>
@@ -108,24 +118,24 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </GridPane>
-      <Button fx:id="addSongBtn" mnemonicParsing="false" text="Add Song" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#addSong">
+      <Button fx:id="addSongBtn" mnemonicParsing="false" onAction="#addSong" text="Add Song" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="editSongBtn" mnemonicParsing="false" text="Edit Song" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" onAction ="#editSong">
+      <Button fx:id="editSongBtn" mnemonicParsing="false" onAction="#editSong" text="Edit Song" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteSongBtn" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#deleteSong">
+      <Button fx:id="deleteSongBtn" mnemonicParsing="false" onAction="#deleteSong" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="230.0" />
          </GridPane.margin>
       </Button>
-      <TextArea fx:id="songDetailView" prefColumnCount="10" GridPane.rowIndex="1" wrapText="true" editable="false">
+      <TextArea fx:id="songDetailView" editable="false" prefColumnCount="10" wrapText="true" GridPane.rowIndex="1">
        <GridPane.margin>
-        <Insets bottom="10.0" left="10.0" right="0.0" top="15.0"/>
+        <Insets bottom="10.0" left="10.0" right="0.0" top="15.0" />
     	</GridPane.margin>
       </TextArea>
       <Label text="Song Details" GridPane.halignment="CENTER" GridPane.rowIndex="1">

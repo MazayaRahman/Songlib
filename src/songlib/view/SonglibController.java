@@ -1,9 +1,12 @@
+/**
+ * @author Mazaya Rahman
+ * @author Disha Bailoor
+ *
+ */
+
 package songlib.view;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.io.*; 
@@ -17,9 +20,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import songlib.app.Song; 
 
@@ -58,7 +66,7 @@ public class SonglibController {
 			if (myPlaylist.createNewFile()) {
 			    System.out.println("File created: " + myPlaylist.getName());
 			  } else {
-			    System.out.println("File already exists.");
+			    System.out.println("Playlist file already exists.");
 			  }
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -70,9 +78,7 @@ public class SonglibController {
 	          Scanner myReader = new Scanner(myPlaylist);
 	          while (myReader.hasNextLine()) {
 	            String data = myReader.nextLine();
-	            System.out.println(data);
 	            String[] details = data.split(",",-1); 
-	            System.out.println(details); 
 	            Song newSong = new Song(details[0], details[1]); 
 	            if(details[2] != null) {
 	            	newSong.albumName = details[2]; 
@@ -89,7 +95,8 @@ public class SonglibController {
 	     }
 				
 		Collections.sort(songObjList);    
-		System.out.print(songObjList);
+		
+		songListView.setCellFactory(stringListView -> new CenteredListViewCell());
 		
 		songListView.setItems(songObjList);
 		
@@ -100,7 +107,7 @@ public class SonglibController {
 		songListView.getSelectionModel().selectedItemProperty().addListener(new
 		ChangeListener<Song>() { public void changed(ObservableValue<? extends Song>
 			observable, Song oldValue, Song newValue) { showItem(mainStage);
-			System.out.println("selection changed"); } });
+		 } });
 		
 		//enable/disable fields when app is started
 		songNameText.setDisable(true);
@@ -122,10 +129,8 @@ public class SonglibController {
 	private void showItem(Stage mainStage) {
 		int index = songListView.getSelectionModel().getSelectedIndex();
 		if(index < 0 || index > songObjList.size()-1) {
-			System.out.println("whyyy");
 			return;
 		}
-		System.out.print("Showing item: " + index);
 		
 		//Populate song details view
 		String content = "Song Name: \t\t\t" + songObjList.get(index).songName + "\n" + "Artist: \t\t\t\t" + songObjList.get(index).artistName;
@@ -189,10 +194,20 @@ public class SonglibController {
 			alert.showAndWait();
 			return;
 		}
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Delete Confirmation");
+		alert.setHeaderText("ARE YOU SURE?");
+		String content = "This song will be deleted permanently."; 
+		alert.setContentText(content);
+		alert.showAndWait();
+		
+		if(alert.getResult().getText().contentEquals("Cancel")) {
+			return;
+		}
 		songObjList.remove(currentSong);
 		
 		//index selection check
-		System.out.println("list length: " + songObjList.size());
 		if(songObjList.isEmpty()) {
 			songDetailView.clear();
 			return;
@@ -203,7 +218,6 @@ public class SonglibController {
 		}else {
 			songListView.getSelectionModel().select(currentIndex+1);
 		}	
-		System.out.println("Index after del: " + currentIndex);		
 	}
 	
 	/**
@@ -298,6 +312,17 @@ public class SonglibController {
 		//add is not clicked
 		addClicked = false; 
 		
+		if(songObjList.isEmpty()) {
+			//error check
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Playlist Empty!");
+			alert.setHeaderText("Error!");
+			String content = "There are no songs to edit."; 
+			alert.setContentText(content);
+			alert.showAndWait();
+			return;
+		}
+		
 		//list disabled
 		songListView.setDisable(true);
 		
@@ -376,11 +401,43 @@ public class SonglibController {
 		    	  myWriter.write("" + thisSong.songName + "," + thisSong.artistName + "," + thisSong.albumName + "," + thisSong.year + "\n"); 
 		      }
 		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
+		      System.out.println("Playlist successfully written.");
 		   } catch (IOException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		   }
-		System.out.println("I AM BEING CLOSED"); 
 	}
+}
+
+/**
+ * Customized List Cell Class
+ * @author Mazaya Rahman
+ * @author Disha Bailoor
+ */
+final class CenteredListViewCell extends ListCell<Song> {
+	HBox hbox = new HBox();
+    Label label = new Label("(empty)");
+    Label artistLabel = new Label("(empty)");
+    Pane pane = new Pane();
+    Song lastItem;
+    
+    public CenteredListViewCell() {
+        super();
+        hbox.getChildren().addAll(label, pane, artistLabel);
+        HBox.setHgrow(pane, Priority.ALWAYS);
+    }
+	
+    @Override
+    protected void updateItem(Song item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty) {
+        	lastItem = null;
+            setGraphic(null);
+        } else {
+        	lastItem = item;
+            label.setText(item!=null ? item.songName : "<null>");
+            artistLabel.setText(item!=null ? item.artistName : "<null>");
+            setGraphic(hbox);
+        }
+    }
 }
